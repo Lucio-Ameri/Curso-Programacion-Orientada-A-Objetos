@@ -2,6 +2,8 @@ package modelo;
 
 import modelo.enums.Moneda;
 
+import java.util.Objects;
+
 public class Dinero implements Comparable<Dinero>{
     private final Moneda moneda;
     private final double monto;
@@ -78,5 +80,15 @@ public class Dinero implements Comparable<Dinero>{
         Dinero dinero = (Dinero) o;
         // como monto siempre está redondeado a 2 decimales, compare exacto es estable
         return Double.compare(dinero.monto, monto) == 0 && moneda == dinero.moneda;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(moneda, monto);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("$%f (%s)\n", monto, moneda);
     }
 }

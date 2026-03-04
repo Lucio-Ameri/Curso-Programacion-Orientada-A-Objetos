@@ -131,6 +131,4 @@ public class TestUsuario {
         assertFalse(s.contains("aa1!aaaa"), "No debe mostrar el valor de password");
         assertFalse(s.contains("password"), "Evitar incluso la etiqueta 'password' en claro");
     }
-
-
 }
