@@ -1,9 +1,7 @@
-package java.com.fintech.app.model;
+package com.fintech.app.model;
 
-import main.java.com.fintech.app.model.Dinero;
-import main.java.com.fintech.app.model.Movimiento;
-import main.java.com.fintech.app.model.enums.Moneda;
-import main.java.com.fintech.app.model.enums.TipoMovimiento;
+import com.fintech.app.model.enums.Moneda;
+import com.fintech.app.model.enums.TipoMovimiento;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

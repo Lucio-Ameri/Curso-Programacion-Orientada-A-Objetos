@@ -1,7 +1,7 @@
-package main.java.com.fintech.app.model;
+package com.fintech.app.model;
 
-import main.java.com.fintech.app.model.enums.Moneda;
-import main.java.com.fintech.app.model.enums.TipoCuenta;
+import com.fintech.app.model.enums.Moneda;
+import com.fintech.app.model.enums.TipoCuenta;
 
 import java.util.Objects;
 

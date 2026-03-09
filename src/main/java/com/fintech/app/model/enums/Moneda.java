@@ -1,4 +1,4 @@
-package main.java.com.fintech.app.model.enums;
+package com.fintech.app.model.enums;
 
 public enum Moneda {
     ARS(1.00, 1.00),

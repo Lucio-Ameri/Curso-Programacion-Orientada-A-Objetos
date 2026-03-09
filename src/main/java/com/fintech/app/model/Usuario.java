@@ -1,4 +1,4 @@
-package main.java.com.fintech.app.model;
+package com.fintech.app.model;
 
 import java.util.Locale;
 import java.util.Objects;

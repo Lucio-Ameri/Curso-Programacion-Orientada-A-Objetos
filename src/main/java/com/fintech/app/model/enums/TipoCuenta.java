@@ -1,4 +1,4 @@
-package main.java.com.fintech.app.model.enums;
+package com.fintech.app.model.enums;
 
 public enum TipoCuenta {
     CAJA_DE_AHORRO_EN_PESOS,

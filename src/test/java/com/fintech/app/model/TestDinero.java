@@ -1,7 +1,6 @@
-package java.com.fintech.app.model;
+package com.fintech.app.model;
 
-import main.java.com.fintech.app.model.Dinero;
-import main.java.com.fintech.app.model.enums.Moneda;
+import com.fintech.app.model.enums.Moneda;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
