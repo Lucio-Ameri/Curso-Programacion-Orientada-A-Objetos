@@ -6,7 +6,7 @@ import modelo.enums.TipoCuenta;
 import java.util.Objects;
 
 public class Cuenta {
-    private final int ID;
+    private final int cuentaID;
     private final int usuarioID;
     private final TipoCuenta cuenta;
     private Dinero monto;
@@ -25,7 +25,7 @@ public class Cuenta {
             throw new IllegalArgumentException("TIPO CUENTA NULL, DATO INVALIDO");
         }
 
-        this.ID = ID;
+        this.cuentaID = ID;
         this.usuarioID = usuarioID;
         this.cuenta = cuenta;
 
@@ -37,7 +37,7 @@ public class Cuenta {
     }
 
     public int getID() {
-        return ID;
+        return cuentaID;
     }
 
     public int getUsuarioID() {
@@ -91,19 +91,19 @@ public class Cuenta {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cuenta other)) return false;
-        return ID == other.getID();
+        return cuentaID == other.getID();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID);
+        return Objects.hash(cuentaID);
     }
 
     @Override
     public String toString() {
         // No revienta aunque algún campo sea null (en runtime) y muestra campos básicos.
         return "Cuenta{" +
-                "id=" + ID +
+                "id=" + cuentaID +
                 ", usuarioId=" + usuarioID +
                 ", tipoCuenta=" + cuenta +
                 ", dinero=" + monto +
