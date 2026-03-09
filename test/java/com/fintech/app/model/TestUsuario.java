@@ -1,4 +1,6 @@
-import modelo.Usuario;
+package java.com.fintech.app.model;
+
+import main.java.com.fintech.app.model.Usuario;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

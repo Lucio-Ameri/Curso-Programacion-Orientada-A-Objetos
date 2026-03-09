@@ -1,6 +1,6 @@
-package modelo;
+package main.java.com.fintech.app.model;
 
-import modelo.enums.TipoMovimiento;
+import main.java.com.fintech.app.model.enums.TipoMovimiento;
 
 import java.time.LocalDateTime;
 

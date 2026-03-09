@@ -1,7 +1,9 @@
-import modelo.Cuenta;
-import modelo.Dinero;
-import modelo.enums.Moneda;
-import modelo.enums.TipoCuenta;
+package java.com.fintech.app.model;
+
+import main.java.com.fintech.app.model.Cuenta;
+import main.java.com.fintech.app.model.Dinero;
+import main.java.com.fintech.app.model.enums.Moneda;
+import main.java.com.fintech.app.model.enums.TipoCuenta;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
