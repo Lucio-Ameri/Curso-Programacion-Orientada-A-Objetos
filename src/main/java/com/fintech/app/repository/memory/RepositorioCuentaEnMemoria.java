@@ -1,4 +1,4 @@
 package com.fintech.app.repository.memory;
 
-public class RepositorioCuentaEnMemoria {
+public class RepositorioCuentaEnMemoria{
 }
