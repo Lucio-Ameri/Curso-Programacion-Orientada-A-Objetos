@@ -1,4 +1,4 @@
-package main.java.com.fintech.app;
+package com.fintech.app;
 
 public class Main {
 }
