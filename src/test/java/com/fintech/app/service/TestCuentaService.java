@@ -6,8 +6,10 @@ import com.fintech.app.model.Usuario;
 import com.fintech.app.model.enums.Moneda;
 import com.fintech.app.model.enums.TipoCuenta;
 import com.fintech.app.repository.RepositorioCuenta;
+import com.fintech.app.repository.RepositorioMovimiento;
 import com.fintech.app.repository.RepositorioUsuario;
 import com.fintech.app.repository.memory.RepositorioCuentaEnMemoria;
+import com.fintech.app.repository.memory.RepositorioMovimientoEnMemoria;
 import com.fintech.app.repository.memory.RepositorioUsuarioEnMemoria;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,13 +22,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestCuentaService {
     private RepositorioCuenta repositorioCuenta;
     private RepositorioUsuario repositorioUsuario;
+    private RepositorioMovimiento repositorioMovimiento;
     private CuentaService servicio;
 
     @BeforeEach
     public void inicializar(){
         repositorioCuenta = new RepositorioCuentaEnMemoria();
         repositorioUsuario = new RepositorioUsuarioEnMemoria();
-        servicio = new CuentaService(repositorioCuenta, repositorioUsuario);
+        repositorioMovimiento = new RepositorioMovimientoEnMemoria();
+        servicio = new CuentaService(repositorioCuenta, repositorioUsuario, repositorioMovimiento);
     }
 
     private Usuario crearUsuario(int ID, String email, String DNI){
@@ -39,12 +43,17 @@ public class TestCuentaService {
 
     @Test
     public void TestConstructorLanzaExcepcionSiElRepositorioCuentaEsNull(){
-        assertThrows(IllegalArgumentException.class, () -> new CuentaService(null, new RepositorioUsuarioEnMemoria()));
+        assertThrows(IllegalArgumentException.class, () -> new CuentaService(null, new RepositorioUsuarioEnMemoria(), new RepositorioMovimientoEnMemoria()));
     }
 
     @Test
     public void TestConstructorLanzaExcepcionSiElRepositorioUsuarioEsNull(){
-        assertThrows(IllegalArgumentException.class, () -> new CuentaService(new RepositorioCuentaEnMemoria(), null));
+        assertThrows(IllegalArgumentException.class, () -> new CuentaService(new RepositorioCuentaEnMemoria(), null, new RepositorioMovimientoEnMemoria()));
+    }
+
+    @Test
+    public void TestConstructorLanzaExcepcionSiElRepositorioMovimientoEsNull(){
+        assertThrows(IllegalArgumentException.class, () -> new CuentaService(new RepositorioCuentaEnMemoria(), new RepositorioUsuarioEnMemoria(),null));
     }
 
     @Test
@@ -230,7 +239,7 @@ public class TestCuentaService {
 
         assertEquals(0.0, c.getMonto().getMonto());
 
-        Cuenta actualizada = servicio.depositarDinero(1, new Dinero(400.50, Moneda.ARS));
+        Cuenta actualizada = servicio.depositarDinero(1, new Dinero(400.50, Moneda.ARS), 1);
         assertEquals(400.50, actualizada.getMonto().getMonto());
         assertEquals(Moneda.ARS, actualizada.getMonto().getMoneda());
     }
@@ -243,12 +252,12 @@ public class TestCuentaService {
         Cuenta c = crearCuenta(1, 1);
         servicio.registrarCuenta(c);
 
-        assertThrows(IllegalArgumentException.class, () -> servicio.depositarDinero(1, null));
+        assertThrows(IllegalArgumentException.class, () -> servicio.depositarDinero(1, null, 1));
     }
 
     @Test
     public void TestDepositarEnCuentaLanzaExcepcionSiLaCuentaNoExiste(){
-        assertThrows(IllegalArgumentException.class, () -> servicio.depositarDinero(99, new Dinero(400.50, Moneda.ARS)));
+        assertThrows(IllegalArgumentException.class, () -> servicio.depositarDinero(99, new Dinero(400.50, Moneda.ARS), 1));
     }
 
     @Test
@@ -259,10 +268,10 @@ public class TestCuentaService {
         Cuenta c = crearCuenta(1, 1);
         servicio.registrarCuenta(c);
 
-        Cuenta ingresado = servicio.depositarDinero(1, new Dinero(400.50, Moneda.ARS));
+        Cuenta ingresado = servicio.depositarDinero(1, new Dinero(400.50, Moneda.ARS), 1);
         assertEquals(400.50, ingresado.getMonto().getMonto());
 
-        Cuenta retirado = servicio.retirarDinero(1, new Dinero(200.00, Moneda.ARS));
+        Cuenta retirado = servicio.retirarDinero(1, new Dinero(200.00, Moneda.ARS), 2);
         assertEquals(200.50, retirado.getMonto().getMonto());
         assertEquals(Moneda.ARS, retirado.getMonto().getMoneda());
     }
@@ -275,7 +284,7 @@ public class TestCuentaService {
         Cuenta c = crearCuenta(1, 1);
         servicio.registrarCuenta(c);
 
-        assertThrows(IllegalArgumentException.class, () -> servicio.retirarDinero(1, null));
+        assertThrows(IllegalArgumentException.class, () -> servicio.retirarDinero(1, null, 1));
     }
 
     @Test
@@ -285,9 +294,9 @@ public class TestCuentaService {
 
         Cuenta c = crearCuenta(1, 1);
         servicio.registrarCuenta(c);
-        servicio.depositarDinero(1, new Dinero(400.50, Moneda.ARS));
+        servicio.depositarDinero(1, new Dinero(400.50, Moneda.ARS), 1);
 
-        assertThrows(IllegalArgumentException.class, () -> servicio.retirarDinero(99, new Dinero(300.00, Moneda.ARS)));
+        assertThrows(IllegalArgumentException.class, () -> servicio.retirarDinero(99, new Dinero(300.00, Moneda.ARS), 2));
     }
 
     @Test
@@ -297,8 +306,8 @@ public class TestCuentaService {
 
         Cuenta cuenta = crearCuenta(1, 1);
         servicio.registrarCuenta(cuenta);
-        servicio.depositarDinero(1, new Dinero(100.0, Moneda.ARS));
+        servicio.depositarDinero(1, new Dinero(100.0, Moneda.ARS),1);
 
-        assertThrows(IllegalArgumentException.class, () -> servicio.retirarDinero(1, new Dinero(200.0, Moneda.ARS)));
+        assertThrows(IllegalArgumentException.class, () -> servicio.retirarDinero(1, new Dinero(200.0, Moneda.ARS), 2));
     }
 }
