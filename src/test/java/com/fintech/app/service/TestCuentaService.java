@@ -39,12 +39,12 @@ public class TestCuentaService {
 
     @Test
     public void TestConstructorLanzaExcepcionSiElRepositorioCuentaEsNull(){
-        assertThrows(IllegalArgumentException.class, () -> new CuentaService(null, repositorioUsuario));
+        assertThrows(IllegalArgumentException.class, () -> new CuentaService(null, new RepositorioUsuarioEnMemoria()));
     }
 
     @Test
     public void TestConstructorLanzaExcepcionSiElRepositorioUsuarioEsNull(){
-        assertThrows(IllegalArgumentException.class, () -> new CuentaService(repositorioCuenta, null));
+        assertThrows(IllegalArgumentException.class, () -> new CuentaService(new RepositorioCuentaEnMemoria(), null));
     }
 
     @Test
