@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Fintech POO</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <h1>Dashboard</h1>
+        <p class="muted">Resumen del usuario autenticado</p>
+    </div>
+
+    <div class="topbar-actions">
+        <a href="/accounts.html" class="btn secondary">Mis cuentas</a>
+        <button id="logoutBtn" class="btn danger">Cerrar sesión</button>
+    </div>
+</header>
+
+<main class="page">
+    <section class="card">
+        <h2>Usuario</h2>
+        <div id="userInfo" class="info-grid"></div>
+    </section>
+</main>
+
+<script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

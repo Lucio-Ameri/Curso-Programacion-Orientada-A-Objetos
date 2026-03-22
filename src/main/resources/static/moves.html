@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movimientos - Fintech POO</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <h1>Movimientos</h1>
+        <p class="muted">Consultá los datos de la cuenta y su historial.</p>
+    </div>
+
+    <div class="topbar-actions">
+        <a href="/accounts.html" class="btn secondary">Volver a cuentas</a>
+        <button id="logoutBtn" class="btn danger">Cerrar sesión</button>
+    </div>
+</header>
+
+<main class="page split">
+    <section class="card">
+        <h2>Cuenta seleccionada</h2>
+        <div id="selectedAccountInfo" class="info-grid"></div>
+    </section>
+
+    <section class="card">
+        <div class="section-header">
+            <h2>Historial</h2>
+            <button id="refreshMovesBtn" class="btn secondary">Actualizar</button>
+        </div>
+
+        <div id="movesEmpty" class="empty-state hidden">
+            Esta cuenta todavía no tiene movimientos.
+        </div>
+
+        <div id="movesList" class="list"></div>
+        <p id="moneyMessage" class="feedback"></p>
+    </section>
+</main>
+
+<script type="module" src="/js/moves.js"></script>
+</body>
+</html>

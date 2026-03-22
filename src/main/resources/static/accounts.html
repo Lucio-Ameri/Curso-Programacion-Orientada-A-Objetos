@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuentas - Fintech POO</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <h1>Mis cuentas</h1>
+        <p class="muted">Creá una cuenta y gestioná tus movimientos.</p>
+    </div>
+
+    <div class="topbar-actions">
+        <a href="/dashboard.html" class="btn secondary">Dashboard</a>
+        <button id="logoutBtn" class="btn danger">Cerrar sesión</button>
+    </div>
+</header>
+
+<main class="page split">
+    <section class="card">
+        <h2>Crear cuenta</h2>
+
+        <form id="createAccountForm" class="form-grid">
+            <label for="tipoCuenta">Tipo de cuenta</label>
+            <select id="tipoCuenta" name="tipoCuenta" required>
+                <option value="">Seleccioná una opción</option>
+                <option value="CAJA_DE_AHORRO_EN_PESOS">Caja de ahorro en pesos</option>
+                <option value="CAJA_DE_AHORRO_EN_DOLARES">Caja de ahorro en dólares</option>
+                <option value="CAJA_DE_AHORRO_EN_EUROS">Caja de ahorro en euros</option>
+            </select>
+
+            <button type="submit" class="btn primary">Crear cuenta</button>
+        </form>
+
+        <p id="accountMessage" class="feedback"></p>
+    </section>
+
+    <section class="card">
+        <div class="section-header">
+            <h2>Listado de cuentas</h2>
+            <button id="refreshAccountsBtn" class="btn secondary">Actualizar</button>
+        </div>
+
+        <div id="accountsEmpty" class="empty-state hidden">
+            Todavía no tenés cuentas creadas.
+        </div>
+
+        <div id="accountsList" class="list"></div>
+    </section>
+</main>
+
+<!-- Modal de operación -->
+<div id="operationModal" class="modal-overlay hidden">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h2>Realizar movimiento</h2>
+            <button id="closeModalBtn" class="modal-close" type="button">&times;</button>
+        </div>
+
+        <form id="operationForm" class="form-grid">
+            <label for="modalCuentaId">Cuenta</label>
+            <select id="modalCuentaId" required></select>
+
+            <label for="modalTipoOperacion">Tipo de movimiento</label>
+            <select id="modalTipoOperacion" required>
+                <option value="deposito">Depósito</option>
+                <option value="retiro">Retiro</option>
+            </select>
+
+            <label for="modalMonto">Monto</label>
+            <input id="modalMonto" type="number" step="0.01" min="0.01" required />
+
+            <div id="selectedCurrencyInfo" class="info-item">
+                <strong>Moneda:</strong> <span id="selectedCurrencyText">-</span>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" id="cancelModalBtn" class="btn secondary">Cancelar</button>
+                <button type="submit" class="btn primary">Confirmar movimiento</button>
+            </div>
+        </form>
+
+        <p id="operationMessage" class="feedback"></p>
+    </div>
+</div>
+
+<script type="module" src="/js/accounts.js"></script>
+</body>
+</html>
