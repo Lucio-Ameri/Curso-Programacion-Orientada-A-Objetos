@@ -16,22 +16,22 @@ public class TestUsuarioService {
     private UsuarioService servicios;
 
     @BeforeEach
-    public void iniciarPruebas(){
+    public void iniciarPruebas() {
         memoria = new RepositorioUsuarioEnMemoria();
         servicios = new UsuarioService(memoria);
     }
 
-    private Usuario crearUsuario(int ID, String email, String DNI){
-        return new Usuario(ID, "Pepito", "Pepon", email, "Password1234!",DNI);
+    private Usuario crearUsuario(int ID, String email, String DNI) {
+        return new Usuario(ID, "Pepito", "Pepon", email, "Password1234!", DNI);
     }
 
     @Test
-    public void TestCrearUsuarioServiceLanzaExcepcionPorRepositorioNull(){
+    public void TestCrearUsuarioServiceLanzaExcepcionPorRepositorioNull() {
         assertThrows(IllegalArgumentException.class, () -> new UsuarioService(null));
     }
 
     @Test
-    public void TestRegistrarUsuarioDevuelveElMismoUsuarioYLoGuardaCorrectamente(){
+    public void TestRegistrarUsuarioDevuelveElMismoUsuarioYLoGuardaCorrectamente() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
 
         Usuario guardado = servicios.registrarUsuario(usuario);
@@ -41,12 +41,12 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestRegistrarUsuarioLanzaExcepcionSiEsNull(){
+    public void TestRegistrarUsuarioLanzaExcepcionSiEsNull() {
         assertThrows(IllegalArgumentException.class, () -> servicios.registrarUsuario(null));
     }
 
     @Test
-    public void TestRegistrarUsuarioLanzaExcepcionSiSeIntentaConUnIDYaExistente(){
+    public void TestRegistrarUsuarioLanzaExcepcionSiSeIntentaConUnIDYaExistente() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
         Usuario usuario2 = crearUsuario(1, "Pepito2@gmail.com", "11111111");
 
@@ -55,7 +55,7 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestRegistrarUsuarioLanzaExcepcionSiSeIntentaConUnEmailYaExistente(){
+    public void TestRegistrarUsuarioLanzaExcepcionSiSeIntentaConUnEmailYaExistente() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
         Usuario usuario2 = crearUsuario(2, "Pepito@gmail.com", "11111111");
 
@@ -64,7 +64,7 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestRegistrarUsuarioLanzaExcepcionSiSeIntentaConUnDNIYaExistente(){
+    public void TestRegistrarUsuarioLanzaExcepcionSiSeIntentaConUnDNIYaExistente() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
         Usuario usuario2 = crearUsuario(2, "Pepito2@gmail.com", "12345678");
 
@@ -73,7 +73,7 @@ public class TestUsuarioService {
     }
 
     @Test //Mismo ID.
-    public void TestActualizarUsuarioNoLanzaExcepcionSiEsElMismoUsuario(){
+    public void TestActualizarUsuarioNoLanzaExcepcionSiEsElMismoUsuario() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
         Usuario actualizado = new Usuario(1, "PepitoModificado", "Pepon", "Pepito2@gmail.com", "Password12345!", "11111111");
 
@@ -91,18 +91,18 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestActualizarUsuarioLanzaExcepcionSiElMismoEsNull(){
+    public void TestActualizarUsuarioLanzaExcepcionSiElMismoEsNull() {
         assertThrows(IllegalArgumentException.class, () -> servicios.actualizarUsuario(null));
     }
 
     @Test
-    public void TestActualizarUsuarioLanzaExcepcionSiElMismoNoExiste(){
+    public void TestActualizarUsuarioLanzaExcepcionSiElMismoNoExiste() {
         Usuario inexistente = crearUsuario(99, "NoExiste@gmail.com", "00000000");
         assertThrows(IllegalArgumentException.class, () -> servicios.actualizarUsuario(inexistente));
     }
 
     @Test
-    public void TestActualizarUsuarioLanzaExcepcionSiSeIntentaConElEmailDeOtroUsuario(){
+    public void TestActualizarUsuarioLanzaExcepcionSiSeIntentaConElEmailDeOtroUsuario() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
         Usuario usuario2 = crearUsuario(2, "Pepito2@gmail.com", "11111111");
 
@@ -114,7 +114,7 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestActualizarUsuarioLanzaExcepcionSiSeIntentaConElDNIDeOtroUsuario(){
+    public void TestActualizarUsuarioLanzaExcepcionSiSeIntentaConElDNIDeOtroUsuario() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
         Usuario usuario2 = crearUsuario(2, "Pepito2@gmail.com", "11111111");
 
@@ -126,7 +126,7 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestBuscarPorIDDevuelveAlUsuarioSiEsQueExiste(){
+    public void TestBuscarPorIDDevuelveAlUsuarioSiEsQueExiste() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
 
         servicios.registrarUsuario(usuario);
@@ -137,13 +137,13 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestBuscarPorIDDevuelveEmptySiEsQueNoExiste(){
+    public void TestBuscarPorIDDevuelveEmptySiEsQueNoExiste() {
         Optional<Usuario> buscado = servicios.buscarPorID(1);
         assertTrue(buscado.isEmpty());
     }
 
     @Test
-    public void TestBuscarPorEmailDevuelveAlUsuarioSiEsQueExiste(){
+    public void TestBuscarPorEmailDevuelveAlUsuarioSiEsQueExiste() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
 
         servicios.registrarUsuario(usuario);
@@ -154,18 +154,18 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestBuscarPorEmailDevuelveEmptySiEsQueNoExiste(){
+    public void TestBuscarPorEmailDevuelveEmptySiEsQueNoExiste() {
         Optional<Usuario> buscado = servicios.buscarPorEmail("NoExiste@gmail.com");
         assertTrue(buscado.isEmpty());
     }
 
     @Test
-    public void TestBuscarPorEmailLanzaExcepcionSiElEmailEsNull(){
+    public void TestBuscarPorEmailLanzaExcepcionSiElEmailEsNull() {
         assertThrows(IllegalArgumentException.class, () -> servicios.buscarPorEmail(null));
     }
 
     @Test
-    public void TestBuscarPorDNIDevuelveAlUsuarioSiEsQueExiste(){
+    public void TestBuscarPorDNIDevuelveAlUsuarioSiEsQueExiste() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
 
         servicios.registrarUsuario(usuario);
@@ -176,18 +176,18 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestBuscarPorDNIDevuelveEmptySiEsQueNoExiste(){
+    public void TestBuscarPorDNIDevuelveEmptySiEsQueNoExiste() {
         Optional<Usuario> buscado = servicios.buscarPorDNI("00000000");
         assertTrue(buscado.isEmpty());
     }
 
     @Test
-    public void TestBuscarPorDNILanzaExcepcionSiElEmailEsNull(){
+    public void TestBuscarPorDNILanzaExcepcionSiElEmailEsNull() {
         assertThrows(IllegalArgumentException.class, () -> servicios.buscarPorDNI(null));
     }
 
     @Test
-    public void TestListarUsuariosDevuelveLaListaCompletaSiEsQueHayUsuarios(){
+    public void TestListarUsuariosDevuelveLaListaCompletaSiEsQueHayUsuarios() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
         Usuario usuario2 = crearUsuario(2, "Pepito2@gmail.com", "11111111");
         Usuario usuario3 = crearUsuario(3, "Pepito3@gmail.com", "22222222");
@@ -206,12 +206,12 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestListarUsuariosDevuelveUnaListaVaciaSiEsQueNoHayUsuarios(){
+    public void TestListarUsuariosDevuelveUnaListaVaciaSiEsQueNoHayUsuarios() {
         assertTrue(servicios.listarUsuarios().isEmpty());
     }
 
     @Test
-    public void TestEliminarPorIDCuandoExisteElUsuarioDeberiaDesaparecer(){
+    public void TestEliminarPorIDCuandoExisteElUsuarioDeberiaDesaparecer() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
 
         servicios.registrarUsuario(usuario);
@@ -222,12 +222,12 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestEliminarPorIDCuandoNoExisteElUsuarioNoRompe(){
+    public void TestEliminarPorIDCuandoNoExisteElUsuarioNoRompe() {
         assertDoesNotThrow(() -> servicios.eliminarPorID(99));
     }
 
     @Test
-    public void TestExistePorEmailDevuelveTrueSiEsQueEstaElUsuario(){
+    public void TestExistePorEmailDevuelveTrueSiEsQueEstaElUsuario() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
 
         servicios.registrarUsuario(usuario);
@@ -236,17 +236,17 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestExistePorEmailDevuelveFalseSiEsQueNoEstaElUsuario(){
+    public void TestExistePorEmailDevuelveFalseSiEsQueNoEstaElUsuario() {
         assertFalse(servicios.existePorEmail("NoExiste@gmail.com"));
     }
 
     @Test
-    public void TestExistePorEmailLanzaExcepcionSiEsQueElEmailEsNull(){
+    public void TestExistePorEmailLanzaExcepcionSiEsQueElEmailEsNull() {
         assertThrows(IllegalArgumentException.class, () -> servicios.existePorEmail(null));
     }
 
     @Test
-    public void TestExistePorDNIDevuelveTrueSiEsQueEstaElUsuario(){
+    public void TestExistePorDNIDevuelveTrueSiEsQueEstaElUsuario() {
         Usuario usuario = crearUsuario(1, "Pepito@gmail.com", "12345678");
 
         servicios.registrarUsuario(usuario);
@@ -255,13 +255,37 @@ public class TestUsuarioService {
     }
 
     @Test
-    public void TestExistePorDNIDevuelveFalseSiEsQueNoEstaElUsuario(){
+    public void TestExistePorDNIDevuelveFalseSiEsQueNoEstaElUsuario() {
         assertFalse(servicios.existePorDNI("00000000"));
     }
 
     @Test
-    public void TestExistePorDNILanzaExcepcionSiEsQueElEmailEsNull(){
+    public void TestExistePorDNILanzaExcepcionSiEsQueElEmailEsNull() {
         assertThrows(IllegalArgumentException.class, () -> servicios.existePorDNI(null));
     }
 
+    @Test
+    public void TestAutenticarUsuarioDevuelveAlUsuarioSiEsQueLaContraseñaYElEmailSonCorrectos() {
+
+    }
+
+    @Test
+    public void TestAutenticarUsuarioLanzaExcepcionCuandoElEmailEsNullOEnBlanco() {
+
+    }
+
+    @Test
+    public void TestAutenticarUsuarioLanzaExcepcionCuandoLaContraseñaEsNullOEnBlanco() {
+
+    }
+
+    @Test
+    public void TestAutenticarUsuarioLanzaExcepcionCuandoNoExisteUnUsuarioConEseEmail() {
+
+    }
+
+    @Test
+    public void TestAutenticarUsuarioLanzaExcepcionCuandoLaContraseñaEsIncorrecta() {
+
+    }
 }

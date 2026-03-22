@@ -85,11 +85,11 @@ public class CuentaService {
             throw new IllegalArgumentException("NO SE PUEDE DEPOSITAR DINERO EN UNA CUENTA QUE NO EXISTE");
         }
 
+        c.get().depositar(dinero);
 
         Movimiento mov = new Movimiento(movimientoID, TipoMovimiento.DEPOSITO, dinero, LocalDateTime.now(), ID);
         repositorioMovimiento.guardar(mov);
 
-        c.get().depositar(dinero);
         return repositorioCuenta.guardar(c.get());
     }
 
@@ -103,10 +103,11 @@ public class CuentaService {
             throw new IllegalArgumentException("NO SE PUEDE RETIRAR DINERO EN UNA CUENTA QUE NO EXISTE");
         }
 
+        c.get().retirar(dinero);
+
         Movimiento mov = new Movimiento(movimientoID, TipoMovimiento.RETIRO, dinero, LocalDateTime.now(), ID);
         repositorioMovimiento.guardar(mov);
 
-        c.get().retirar(dinero);
         return repositorioCuenta.guardar(c.get());
     }
 }

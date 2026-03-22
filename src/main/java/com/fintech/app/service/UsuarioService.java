@@ -99,4 +99,23 @@ public class UsuarioService {
 
         return repositorio.existePorDNI(DNI);
     }
+
+    public Usuario autenticar(String email, String password){
+        if(email == null || email.isBlank()){
+            throw new IllegalArgumentException("EL EMAIL INGRESADO ESTA EN BLANCO O ES NULL...");
+        }
+
+        if(password == null || password.isBlank()){
+            throw new IllegalArgumentException("LA CONTRASEÑA INGRESADA ESTA EN BLANCO O ES NULL...");
+        }
+
+        Usuario usuario = repositorio.buscarPorEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("NO EXISTE UN USUARIO CON ESE EMAIL"));
+
+        if(!usuario.getPassword().equals(password)){
+            throw new IllegalArgumentException("CONTRASEÑA INCORRECTA");
+        }
+
+        return usuario;
+    }
 }
